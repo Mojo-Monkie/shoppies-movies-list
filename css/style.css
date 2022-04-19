@@ -1,0 +1,91 @@
+/* Box Model Hack */
+* {
+  box-sizing: border-box;
+}
+
+/* Clear fix hack */
+.clearfix:after {
+     content: ".";
+     display: block;
+     clear: both;
+     visibility: hidden;
+     line-height: 0;
+     height: 0;
+}
+
+.clear {
+	clear: both;
+}
+
+/******************************************
+/* BASE STYLES
+/*******************************************/
+
+body {
+ background-color: gainsboro;
+ border: 2px solid rgb(253, 189, 12);
+ display: flex;
+ flex-wrap: wrap;
+ justify-content: space-around;
+}
+
+
+/******************************************
+/* LAYOUT
+/*******************************************/
+header {
+}
+
+footer {
+
+}
+
+/******************************************
+/* ADDITIONAL STYLES
+/*******************************************/
+h1 {
+  font-size: 20px;
+  border: 2px solid red;
+}
+span {
+  font-size: 16px;
+
+}
+ul {
+  list-style-type: none;
+}
+.hero {
+  width: 100%;
+  border: 2px solid hotpink;
+}
+.search-inventory {
+  width: 97%;
+  height: 50px;
+  margin-bottom: 20px;
+  background-color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid rgb(102, 255, 0);
+}
+.search-inventory button {
+  width: 100px;
+}
+.results-of-search {
+  width: 48%;
+  background-color: whitesmoke;
+  display: flex;
+  border: 2px solid yellow;
+}
+.nominations-list {
+  width: 48%;
+  background-color: whitesmoke;
+  border: 2px solid green;
+}
+.make-a-nomination {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  width: 100%;
+  border: 2px solid rgb(246, 35, 246);
+}
+
