@@ -1,6 +1,5 @@
 document.getElementById('search').addEventListener('click', getFetch)
 
-// document.querySelector('h2').innerText = local.getItem('movies')
 
 function getFetch(){
     const choice = document.querySelector('input').value
@@ -12,53 +11,113 @@ function getFetch(){
         .then(data => {
             
             console.log(data)
+                    
             
-            for (let i = 0; i < data.Search.length; i++) {
-                const poster = data.Search[i].Poster
-                const movieTitle = data.Search[i].Title
-                const yearOfRelease = data.Search[i].Year
+                    for (let i = 0; i < data.Search.length; i++) {
+                        const poster = data.Search[i].Poster
+                        const movieTitle = data.Search[i].Title
+                        const yearOfRelease = data.Search[i].Year
+                        
+                            let image = document.createElement('img');
+                            image.src = poster;
+                            document.querySelector('.movie-board').appendChild(image);
 
-                let image = document.createElement('img');
-                image.src = poster;
-                document.getElementById('results').appendChild(image);
+                            let title = document.createElement('li');
+                            title.innerText = movieTitle;
+                            document.querySelector('.movie-board').appendChild(title)
 
-                let title = document.createElement('li');
-                title.innerText = movieTitle;
-                document.getElementById('results').appendChild(title)
+                            let release = document.createElement('li');
+                            release.innerText = yearOfRelease;
+                            document.querySelector('.movie-board').appendChild(release)
 
-                let release = document.createElement('li');
-                release.innerText = yearOfRelease;
-                document.getElementById('results').appendChild(release)
+                            let nominateBtn = document.createElement('button');
+                            nominateBtn.className = 'Nominate'
+                            nominateBtn.innerText = 'Nominate'
+                            document.querySelector('.movie-board').appendChild(nominateBtn)
+                          
+                        }
 
-                let nominateBtn = document.createElement('button');
-                nominateBtn.className = 'top-five'
-                let idNominateBtn = 'top-five'
-                // nominateBtn.setAttribute('id',idNominateBtn )
-                nominateBtn.innerText = 'Nominate'
-                document.getElementById('results').appendChild(nominateBtn)
+                        let buttons = document.getElementsByClassName('Nominate');
+                        let topFiveLimit = document.getElementsByClassName('top-five');
+                        let remove = document.getElementsByClassName('remove-from-list');
 
-                // document.getElementById('top-five').addEventListener('click', nominate)
+                        for (let i = 0; i < buttons.length; i++) {
+                            const poster = data.Search[i].Poster
+                            const movieTitle = data.Search[i].Title
+                            const yearOfRelease = data.Search[i].Year
 
-                //     function nominate() {
-                //         console.log('click')
-                //         let newNomination = document.createElement('li');
-                //         newNomination.innerText = 'heloo'
-                //         document.getElementById('top-nominations').appendChild(newNomination);
-                //     }
-             }
-            document.querySelectorAll('.top-five').addEventListener('click', nominate)
+                            buttons[i].addEventListener('click', function () {
+                                let newNomination = document.createElement('li');
+                                    newNomination.innerText = `${movieTitle} (${yearOfRelease})`;
+                                    newNomination.className = 'top-five';
 
-                    function nominate() {
-                        console.log('click')
-                        let newNomination = document.createElement('li');
-                        newNomination.innerText = 'heloo'
-                        document.getElementById('top-nominations').appendChild(newNomination);
-                    }
+                                let removeBtn = document.createElement('Button')
+                                    removeBtn.innerText = 'remove'
+                                    // removeBtn.setAttribute("id", 'remove-from-list'); 
+                                    removeBtn.className = 'remove-from-list'
 
-        })
-        .catch(err => {
+                                    if (topFiveLimit.length <= 4) {
+                                        document.getElementById('top-nominations').appendChild(newNomination);
+                                        buttons[i].setAttribute("disabled", true);
+                                        document.getElementById('top-nominations').appendChild(removeBtn);
+
+                                        for (let i = 0; i < remove.length; i++){
+        
+                                                    remove[i].addEventListener('click', function () {
+                                                        console.log(remove)
+                                                        console.log(typeof remove)
+                                                        let removeBtnArray = Object.values(remove).map((key) => [key]);
+                                                        console.log(removeBtnArray);
+                                                        removeBtnArray.splice(removeBtnArray[i], 1);
+                                                        
+                                                   })
+                                                } 
+
+                                        // document.getElementById('remove-from-list').addEventListener('click', function () {
+                                        //     newNomination.remove();
+                                        //     removeBtn.remove();
+                                        } else {
+                                            alert ('Top 5 limit reached. Please remove movie from nominations list')
+                                        }
+                                    })
+
+                                // let remove = document.getElementById('remove-from-list');
+
+                                //     for (let i = 0; i < remove.length; i++){
+        
+                                //         remove[i].addEventListener('click', function () {
+                                //                 newNomination.remove();
+                                //                 removeBtn.remove();
+                                //        })
+                                //     } 
+                                    
+
+                            }
+
+                            
+                        
+
+                        // let remove = document.getElementById('remove-from-list');
+
+                        //     for (let i = 0; i < remove.length; i++){
+
+                        //         remove[i].addEventListener('click', function () {
+                        //                 newNomination.remove();
+                        //                 removeBtn.remove();
+                        //        })
+                        //     } 
+
+
+                                
+
+         })
+                    .catch(err => {
             console.log(`error ${err}`)
         })
 }
+
+
+
+
 
 //ba8c7678
