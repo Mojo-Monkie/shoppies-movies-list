@@ -1,4 +1,5 @@
 document.getElementById('search').addEventListener('click', getFetch)
+document.getElementById('past-nominations').innerText = localStorage.getItem('movies')
 
 
 function getFetch(){
@@ -49,65 +50,63 @@ function getFetch(){
                             buttons[i].addEventListener('click', function () {
                                 let newNomination = document.createElement('li');
                                     newNomination.innerText = `${movieTitle} (${yearOfRelease})`;
-                                    newNomination.className = 'top-five';
+                                    // newNomination.setAttribute('value', `${movieTitle} (${yearOfRelease})`);
+                                    newNomination.setAttribute('id', 'top-five')
 
                                 let removeBtn = document.createElement('Button')
                                     removeBtn.innerText = 'remove'
-                                    // removeBtn.setAttribute("id", 'remove-from-list'); 
-                                    removeBtn.className = 'remove-from-list'
+                                    removeBtn.setAttribute('id', 'on-list')
 
                                     if (topFiveLimit.length <= 4) {
                                         document.getElementById('top-nominations').appendChild(newNomination);
                                         buttons[i].setAttribute("disabled", true);
                                         document.getElementById('top-nominations').appendChild(removeBtn);
+                                        
 
-                                        for (let i = 0; i < remove.length; i++){
-        
-                                                    remove[i].addEventListener('click', function () {
-                                                        console.log(remove)
-                                                        console.log(typeof remove)
-                                                        let removeBtnArray = Object.values(remove).map((key) => [key]);
-                                                        console.log(removeBtnArray);
-                                                        removeBtnArray.splice(removeBtnArray[i], 1);
-                                                        
-                                                   })
-                                                } 
+                                        // *************************************************************
+                                        for (let i = 0; i < )
+                                        
+                                        function save (){
 
-                                        // document.getElementById('remove-from-list').addEventListener('click', function () {
-                                        //     newNomination.remove();
-                                        //     removeBtn.remove();
+                                            let newData = document.getElementById('top-five').innerText;
+                                            console.log( newData )
+
+                                            if(localStorage.getItem('data') == null){
+                                                localStorage.setItem('data', '[]');
+                                            }
+
+                                            let oldData = JSON.parse(localStorage.getItem('data'));
+                                            oldData.push(newData);
+
+                                            localStorage.setItem('data', JSON.stringify(oldData));
+
+                                        }
+                                        
+                                        function view(){
+
+                                            if(localStrong.getItem('data') !=null){
+                                                document.getElementById('past-nominations').innerHTML =JSON.parse(localStorge.getItem('data'))
+                                            }
+                                        }
+                                        
+                                        // ****************************************************************
+                                        removeBtn.addEventListener('click', function () {
+                                            newNomination.remove();
+                                            removeBtn.remove();
+                                            buttons[i].removeAttribute("disabled", true);
+                                        })
+
+
                                         } else {
                                             alert ('Top 5 limit reached. Please remove movie from nominations list')
                                         }
                                     })
 
-                                // let remove = document.getElementById('remove-from-list');
-
-                                //     for (let i = 0; i < remove.length; i++){
-        
-                                //         remove[i].addEventListener('click', function () {
-                                //                 newNomination.remove();
-                                //                 removeBtn.remove();
-                                //        })
-                                //     } 
                                     
 
                             }
 
                             
-                        
-
-                        // let remove = document.getElementById('remove-from-list');
-
-                        //     for (let i = 0; i < remove.length; i++){
-
-                        //         remove[i].addEventListener('click', function () {
-                        //                 newNomination.remove();
-                        //                 removeBtn.remove();
-                        //        })
-                        //     } 
-
-
                                 
 
          })
